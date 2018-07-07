@@ -25,13 +25,19 @@ export class ProfilePage {
   ionViewDidLoad() {
     let localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
+      
+      //-- faz busca por email e seta cliente (dados, img, etc)
       this.clienteService.findByEmail(localUser.email)
         .subscribe(response => {
           this.cliente = response;
           //-- buscar imagem
           this.getImageIfExists();
         },
-        error => {});
+        error => {
+          if (error.status == 403) {
+            this.navCtrl.setRoot('HomePage');
+          }
+        });
     }
   }
 
