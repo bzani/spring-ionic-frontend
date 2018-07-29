@@ -29,7 +29,7 @@ export class ProfilePage {
       //-- faz busca por email e seta cliente (dados, img, etc)
       this.clienteService.findByEmail(localUser.email)
         .subscribe(response => {
-          this.cliente = response;
+          this.cliente = response as ClienteDTO;
           //-- buscar imagem
           this.getImageIfExists();
         },
