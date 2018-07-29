@@ -11,19 +11,12 @@ export class ClienteService {
     constructor(public http : HttpClient, public storage : StorageService) {
     }
 
+    findById(id: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
+    }
+
     findByEmail(email: string) {
-
-        //-- paliativo para capturar token da storage
-        /*
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
-        */
-
         return this.http.get(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
-            //-- paliativo para capturar token da storage
-            /*
-            ,{'headers' : authHeader});
-            */
     }
 
     getImageFromBucket(id: string) : Observable<any> {
