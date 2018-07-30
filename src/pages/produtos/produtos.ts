@@ -44,7 +44,7 @@ export class ProdutosPage {
   }
 
   loadImageUrls(start: number, end: number) {
-    for(var i=start; i<end; i++) {
+    for(var i=start; i<=end; i++) {
       let item = this.items[i];
       this.produtoService.getSmallImageFromBucket(item.id)
         .subscribe(response => {
