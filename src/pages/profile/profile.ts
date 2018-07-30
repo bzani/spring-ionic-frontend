@@ -27,6 +27,10 @@ export class ProfilePage {
 
   //-- executa qdo pagina eh carregada
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     let localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
       
@@ -67,6 +71,20 @@ export class ProfilePage {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (err) => {});
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.loadData();
+      },
+    error => {
+    });
+  }
+
+  cancel() {
+    this.picture = null;
   }
 
 }
